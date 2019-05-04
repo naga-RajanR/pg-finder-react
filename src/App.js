@@ -1,28 +1,67 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component } from "react";
+import { Router, Switch } from "react-router-dom";
+import * as Pages from "./components/pages";
+import { LayoutRoute , EmptyLayout} from "./components/Layout";
+import { History } from "./utilities/func";
+const getBasename = () => {
+  return `/${process.env.PUBLIC_URL.split("/").pop()}`;
+};
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router basename={getBasename()} history={History}>
+        <Switch>
+          <LayoutRoute
+            exact
+            path="/"
+            layout={EmptyLayout}
+            component={Pages.home}
+            />
+            <LayoutRoute
+            exact
+            path="/foodType"
+            layout={EmptyLayout}
+            component={Pages.foodType}
+          />
+           <LayoutRoute
+            exact
+            path="/form"
+            layout={EmptyLayout}
+            component={Pages.form}
+          />
+          <LayoutRoute
+            exact
+            path="/rooms"
+            layout={EmptyLayout}
+            component={Pages.rooms}
+          />
+          <LayoutRoute
+            exact
+            path="/facilities"
+            layout={EmptyLayout}
+            component={Pages.facilities}
+          />
+          <LayoutRoute
+            exact
+            path="/address"
+            layout={EmptyLayout}
+            component={Pages.address}
+          />
+          <LayoutRoute
+            exact
+            path="/pictures"
+            layout={EmptyLayout}
+            component={Pages.pictures}
+          />
+          <LayoutRoute
+            exact
+            path="/details"
+            layout={EmptyLayout}
+            component={Pages.details}
+          />
+        </Switch>
+      </Router>
     );
   }
 }
-
 export default App;
